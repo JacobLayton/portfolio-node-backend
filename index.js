@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
+// Data Parsing
 app.use(
   express.urlencoded({
     extended: false,
