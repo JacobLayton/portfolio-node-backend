@@ -1,4 +1,5 @@
 const express = require("express");
+const sendMail = require("./mail");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const nodemailer = require("nodemailer");
@@ -18,8 +19,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/email", (req, res) => {
+  const { subject, email, text } = req.body;
   console.log("Data: ", req.body);
-  res.json({ message: "Message recieved!" });
+
+  sendMail(email, subject, text, function (err, data) {
+    if (err) {
+      res.status(500).json({ message: "Internal Error" });
+    } else {
+      res.json({ message: "Email Sent!" });
+    }
+  });
 });
 
 app.listen(5000, () => console.log("Server is running on port 5000."));
