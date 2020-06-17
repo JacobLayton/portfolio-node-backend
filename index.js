@@ -1,10 +1,13 @@
 const express = require("express");
 const sendMail = require("./mail");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const nodemailer = require("nodemailer");
 
 const app = express();
+
+app.use(cors());
 
 // Data Parsing
 app.use(
@@ -19,8 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/email", (req, res) => {
-  const { subject, email, text } = req.body;
-  console.log("Data: ", req.body);
+  const { email, subject, text } = req.body.user;
+  console.log("Data: ", req.body.user);
 
   sendMail(email, subject, text, function (err, data) {
     if (err) {

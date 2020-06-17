@@ -25,6 +25,7 @@ const sendMail = (email, subject, text, cb) => {
     } else {
       cb(null, data);
     }
+    transporter.close();
   });
 };
 
