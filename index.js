@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 
 app.post("/email", (req, res) => {
   const { origin, recipient, name, email, subject, text } = req.body.messageData;
-  console.log("Data: ", req.body.messageData);
 
   sendMail(origin, recipient, name, email, subject, text, function (err, data) {
     if (err) {
