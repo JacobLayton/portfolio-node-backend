@@ -25,10 +25,14 @@ const sendMail = (origin, recipient, name, email, subject, text, cb) => {
     text: `Email: ${email}\nName: ${name}\nSubject: ${subject}\nMessage: ${text}`,
   };
 
+  console.log('mailOptions: ', mailOptions);
+
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
+      console.log('==ERR: ', err);
       cb(err, null);
     } else {
+      console.log('SENT!');
       cb(null, data);
     }
     transporter.close();
