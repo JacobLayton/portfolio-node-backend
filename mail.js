@@ -11,11 +11,17 @@ const auth = {
 
 const transporter = nodemailer.createTransport(mailGun(auth));
 
-const sendMail = (name, email, subject, text, cb) => {
+const sendMail = (origin, recipient, name, email, subject, text, cb) => {
+  let subjectPrefix;
+  if (origin === 'TFTE') {
+    subjectPrefix = 'TFTE MESSAGE: ';
+  } else {
+    subjectPrefix = 'PORTFOLIO MESSAGE: ';
+  }
   const mailOptions = {
     from: email,
-    to: "hello@jacoblayton.dev",
-    subject: `From Portfolio: ${subject}`,
+    to: recipient,
+    subject: `${subjectPrefix}${subject}`,
     text: `Email: ${email}\nName: ${name}\nSubject: ${subject}\nMessage: ${text}`,
   };
 
