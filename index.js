@@ -19,10 +19,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/email", (req, res) => {
-  const { name, email, subject, text } = req.body.user;
-  console.log("Data: ", req.body.user);
+  const { origin, recipient, name, email, subject, text } = req.body.messageData;
+  console.log("Data: ", req.body.messageData);
 
-  sendMail(name, email, subject, text, function (err, data) {
+  sendMail(origin, recipient, name, email, subject, text, function (err, data) {
     if (err) {
       res.status(500).json({ message: "Internal Error" });
     } else {
